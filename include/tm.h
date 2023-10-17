@@ -13,25 +13,33 @@
 #define TM_H
 
 #include "tm_tape.h"
+#include "tm_transition.h"
 
 #include <vector>
 #include <set>
 #include <string>
+#include <fstream>
 
 class Tm {
  public:
-  Tm(char blank);
+  Tm(std::string filename, char blank = '.');
   ~Tm();
+  bool Test(std::vector<std::string> input, bool verbose = false);
+  int GetNumberOfTapes();
 
  private:
-  TmTape tape_;
-  std::set<char> states_;
+  void transit();
+  std::vector<std::string> states_;
   std::set<char> input_symbols_;
   std::set<char> tape_symbols_;
   std::string initial_state_;
-  std::set<char> final_states_;
+  std::string blank_;
+  std::vector<std::string> final_states_;
   int number_of_tapes_{0};
-  std::vector<std::string> transitions_;
+  std::vector<TmTransition> transitions_;
+
+  std::vector<TmTape> tapes_;
+  std::string current_state_;
 };
 
 #endif

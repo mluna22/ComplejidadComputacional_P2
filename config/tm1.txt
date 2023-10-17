@@ -10,5 +10,6 @@ q0 a . q0 a R x R
 q0 b . q1 b R . L
 q1 b x q1 b R x L
 q1 b . q2 b R . S
+q1 . . q3 . S . S
 q2 b . q2 b R . S
 q2 . . q3 . S . S

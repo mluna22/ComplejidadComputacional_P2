@@ -1,0 +1,6 @@
+aabbbb
+.
+aabb
+.
+bbb
+.
