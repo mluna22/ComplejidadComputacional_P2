@@ -14,10 +14,7 @@
 TmTape::TmTape() {}
 
 TmTape::TmTape(std::string input) {
-  front_tape_.resize(input.size());
-  for (uint i = 0; i < input.size(); i++) {
-    front_tape_[i] = input[i];
-  }
+  SetInput(input);
 }
 
 TmTape::~TmTape() {}
@@ -26,38 +23,26 @@ void TmTape::SetBlank(char blank) {
   blank_ = blank;
 }
 
-void TmTape::SetInput(std::string input) {
-  back_tape_.clear();
-  front_tape_.resize(input.size());
-  for (uint i = 0; i < input.size(); i++) {
-    front_tape_[i] = input[i];
-  }
-}
-
 char TmTape::Read() {
-  return head_ < 0 ? back_tape_[~head_] : front_tape_[head_];
+  return at(head_);
 }
 
 void TmTape::Write(char symbol) {
-  if (head_ < 0) {
-    back_tape_[~head_] = symbol;
-  } else {
-    front_tape_[head_] = symbol;
-  }
+  at(head_) = symbol;
 }
 
 void TmTape::Move(char direction) {
   switch (direction) {
     case 'L':
       head_--;
-      if (-head_ > int(back_tape_.size())) {
-        back_tape_.push_back(blank_);
+      if (head_ < start()) {
+        push_front(blank_);
       }
       break;
     case 'R':
       head_++;
-      if (head_ >= int(front_tape_.size())) {
-        front_tape_.push_back(blank_);
+      if (head_ >= start() + size()) {
+        push_back(blank_);
       }
       break;
     case 'S':
@@ -69,31 +54,29 @@ void TmTape::Move(char direction) {
 
 void TmTape::Reset() {
   head_ = 0;
-  front_tape_.clear();
-  back_tape_.clear();
+  Clear();
+}
+
+std::string TmTape::ToString() {
+  std::string tape_string{""};
+  if (head_ < start()) {
+    tape_string += "[.]";
+  }
+  for (int i = start(); i < start() + size(); i++) {
+    if (i == head_) tape_string += "[";
+    tape_string += at(i);
+    if (i == head_) tape_string += "]";
+  }
+  while (tape_string.back() == blank_) {
+    tape_string.pop_back();
+  }
+  while (tape_string.front() == blank_) {
+    tape_string.erase(0, 1);
+  }
+  return tape_string;
 }
 
 std::ostream& operator<<(std::ostream& os, TmTape& tape) {
-  std::string tape_string{""};
-  if (-tape.head_ > int(tape.back_tape_.size())) {
-    tape_string += "[.]";
-  }
-  for (int i = tape.back_tape_.size() - 1; i >= 0; i--) {
-    if (i == ~tape.head_) tape_string += "[";
-    tape_string += tape.back_tape_[i];
-    if (i == ~tape.head_) tape_string += "]";
-  }
-  for (int i = 0; i < int(tape.front_tape_.size()); i++) {
-    if (i == tape.head_) tape_string += "[";
-    tape_string += tape.front_tape_[i];
-    if (i == tape.head_) tape_string += "]";
-  }
-  while (tape_string.back() == tape.blank_) {
-    tape_string.pop_back();
-  }
-  while (tape_string.front() == tape.blank_) {
-    tape_string.erase(0, 1);
-  }
-  os << tape_string;
+  os << tape.ToString();
   return os;
 }
