@@ -1,0 +1,14 @@
+# Ejemplo de una MT
+# Reconoce cadenas de a y b con un n�mero impar de a
+p q r
+a b
+a b .
+p
+.
+r
+1
+p a q a R
+p b p b R
+q a p a R
+q b q b R
+q . r . R
