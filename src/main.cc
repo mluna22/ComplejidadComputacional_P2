@@ -66,6 +66,8 @@ int program(int argc, char** argv) {
       std::cout << "Rechazada" << std::endl;
     }
     test_input.clear();
+    for (int i{0}; i < tm.GetNumberOfTapes(); ++i) std::cout << "Cinta " << i + 1 << ": " << tm.ToString(i) << std::endl;
+    std::cout << std::endl; 
   } 
 
   return 0;

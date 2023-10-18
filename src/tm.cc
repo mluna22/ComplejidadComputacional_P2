@@ -103,3 +103,7 @@ bool Tm::Test(std::vector<std::string> input, bool verbose) {
 int Tm::GetNumberOfTapes() {
   return number_of_tapes_;
 }
+
+std::string Tm::ToString(int index) {
+  return tapes_[index].ToString();
+}

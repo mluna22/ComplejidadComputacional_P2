@@ -26,6 +26,7 @@ class Tm {
   ~Tm();
   bool Test(std::vector<std::string> input, bool verbose = false);
   int GetNumberOfTapes();
+  std::string ToString(int index = 0);
 
  private:
   void transit();
