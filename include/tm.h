@@ -22,19 +22,18 @@
 
 class Tm {
  public:
-  Tm(std::string filename, char blank = '.');
+  Tm(std::string filename);
   ~Tm();
-  bool Test(std::vector<std::string> input, bool verbose = false);
+  bool Test(std::vector<std::string> input);
   int GetNumberOfTapes();
   std::string ToString(int index = 0);
 
  private:
-  void transit();
   std::vector<std::string> states_;
   std::set<char> input_symbols_;
   std::set<char> tape_symbols_;
   std::string initial_state_;
-  std::string blank_;
+  char blank_;
   std::vector<std::string> final_states_;
   int number_of_tapes_{0};
   std::vector<TmTransition> transitions_;

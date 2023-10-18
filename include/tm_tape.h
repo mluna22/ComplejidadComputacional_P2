@@ -27,7 +27,7 @@ class TmTape : public Tape {
   void SetBlank(char blank);
   char Read();
   void Write(char symbol);
-  void Move(char direction);
+  void Move(char direction);  // 'L', 'R', 'S'
   std::string ToString();
   friend std::ostream& operator<<(std::ostream& os, TmTape& tape);
 

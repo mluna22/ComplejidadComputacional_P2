@@ -14,7 +14,7 @@
 
 #include <algorithm>
 
-Tm::Tm(std::string filename, char blank) {
+Tm::Tm(std::string filename) {
   std::ifstream file(filename);
   if (!file) throw "Error al abrir el archivo";
 
@@ -45,7 +45,7 @@ Tm::Tm(std::string filename, char blank) {
   // Simbolo blanco
   std::getline(file, line);
   blank_ = line[0];
-  if (tape_symbols_.find(blank) == tape_symbols_.end()) throw "Error: símbolo blanco no pertenece al alfabeto de cinta";
+  if (tape_symbols_.find(blank_) == tape_symbols_.end()) throw "Error: símbolo blanco no pertenece al alfabeto de cinta";
 
   // Conjunto de estados finales
   std::getline(file, line);
@@ -58,7 +58,7 @@ Tm::Tm(std::string filename, char blank) {
   std::getline(file, line);
   number_of_tapes_ = std::stoi(line);
   tapes_.resize(number_of_tapes_);
-  for (TmTape tape : tapes_) tape.SetBlank(blank);
+  for (TmTape tape : tapes_) tape.SetBlank(blank_);
   
   // Transiciones
   while (std::getline(file, line)) {
@@ -69,7 +69,7 @@ Tm::Tm(std::string filename, char blank) {
 
 Tm::~Tm() {}
 
-bool Tm::Test(std::vector<std::string> input, bool verbose) {
+bool Tm::Test(std::vector<std::string> input) {
   if (int(input.size()) != number_of_tapes_) throw "Error: número de cintas incorrecto";
   for (int i{0}; i < number_of_tapes_; ++i) {
     tapes_[i].Reset();
