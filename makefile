@@ -52,10 +52,10 @@ clean:
 cleaner:
 				rm -rf bin/*
 template:
-				mkdir build
-				mkdir bin
-				mkdir include
-				mkdir src
+				mkdir -p build
+				mkdir -p bin
+				mkdir -p include
+				mkdir -p src
 	@echo "Plantilla creada correctamente"
 show:
 	@echo $(AUX)
