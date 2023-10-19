@@ -1,7 +1,7 @@
 # Complejidad Computacional
 ## Práctica 2: Simulador de Máquina de Turing
 
-Compilar: `make`  
+Compilar: `make template; make`  
 Uso: `./bin/tm_simulator <config_file> [input_file]`  
 
 - El programa lee el archivo de configuración indicado como argumento y simula el comportamiento de una máquina de Turing.
