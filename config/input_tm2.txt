@@ -1,8 +1,4 @@
 aababb
-.
 abbb
 .
-.
-.
 bb
-.

@@ -11,7 +11,9 @@
 
 #include "tm_tape.h"
 
-TmTape::TmTape() {}
+TmTape::TmTape() {
+  SetInput(std::string(1,blank_));
+}
 
 TmTape::TmTape(std::string input) {
   SetInput(input);
@@ -55,12 +57,13 @@ void TmTape::Move(char direction) {
 void TmTape::Reset() {
   head_ = 0;
   Clear();
+  SetInput(std::string(1,blank_));
 }
 
 std::string TmTape::ToString() {
   std::string tape_string{""};
   if (head_ < start()) {
-    tape_string += "[.]";
+    tape_string += "[" + std::string(1,blank_) + "]";
   }
   for (int i = start(); i < start() + size(); i++) {
     if (i == head_) tape_string += "[";

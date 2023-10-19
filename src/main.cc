@@ -35,37 +35,25 @@ int program(int argc, char** argv) {
       input.push_back(line);
     }
     if (input.empty()) throw "Error: fichero vacío";
-    if (input.size() % tm.GetNumberOfTapes() != 0) throw "Error: número de cadenas no es múltiplo del número de cintas";
   } else {
     // Entrada por consola
     std::cout << "Introduzca las cadenas a probar (una por línea)" << std::endl;
     std::cout << "Para dejar la cinta vacía introduzca un símbolo blanco" << std::endl;
-    std::cout << "Si la máquina tiene varias cintas, introduzca una cadena por cada cinta, y repita para el número de cadenas que desee probar" << std::endl;
     std::cout << "Para terminar, introduzca una línea vacía: \n" << std::endl;
     do {
       std::getline(std::cin, line);
       if (line.empty()) break;
       input.push_back(line);
-      for (int i{0}; i < tm.GetNumberOfTapes() - 1; ++i) {
-        std::getline(std::cin, line);
-        if (line.empty()) throw "Error: número de cadenas no es múltiplo del número de cintas";
-        input.push_back(line);
-      }
     } while (true);
   }
 
-  std::vector<std::string> test_input;
-  for (uint i{0}; i < input.size(); i = i + tm.GetNumberOfTapes()) {
+  for (uint i{0}; i < input.size(); i++) {
     std::cout << input[i] << ": ";
-    for (int j{0}; j < tm.GetNumberOfTapes(); ++j) {
-      test_input.push_back(input[i + j]);
-    }
-    if (tm.Test(test_input)) {
+    if (tm.Test(input[i])) {
       std::cout << "Aceptada" << std::endl;
     } else {
       std::cout << "Rechazada" << std::endl;
     }
-    test_input.clear();
     for (int i{0}; i < tm.GetNumberOfTapes(); ++i) std::cout << "Cinta " << i + 1 << ": " << tm.ToString(i) << std::endl;
     std::cout << std::endl; 
   } 

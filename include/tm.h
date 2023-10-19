@@ -24,7 +24,7 @@ class Tm {
  public:
   Tm(std::string filename);
   ~Tm();
-  bool Test(std::vector<std::string> input);
+  bool Test(std::string input);
   int GetNumberOfTapes();
   std::string ToString(int index = 0);
 

@@ -69,12 +69,12 @@ Tm::Tm(std::string filename) {
 
 Tm::~Tm() {}
 
-bool Tm::Test(std::vector<std::string> input) {
-  if (int(input.size()) != number_of_tapes_) throw "Error: número de cintas incorrecto";
+bool Tm::Test(std::string input) {
   for (int i{0}; i < number_of_tapes_; ++i) {
     tapes_[i].Reset();
-    tapes_[i].SetInput(input[i]);
+    
   }
+  tapes_[0].SetInput(input);
 
   current_state_ = initial_state_;
   bool remaining_transitions{true};
